@@ -432,7 +432,7 @@ vec3 getMemoryOptimizedVec3(sampler2D tex, ivec2 texSize, ivec3 texDim, int z, i
       readX = 0;
       readY++;
     }
-    vec4 tex2 = texture2D(tex, vec2(readX, readY) / vec2(texSize));
+    vec4 tex2 = texture2D(tex, (vec2(readX, readY) + 0.5) / vec2(texSize));
     if (vectorOffset == 2) {
       return vec3(tex1.z, tex1.w, tex2.x);
     } else {
