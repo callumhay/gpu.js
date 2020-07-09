@@ -87,14 +87,16 @@ class GLTexture extends Texture {
   }
 
   delete() {
-    if (this._deleted) return;
-    this._deleted = true;
+    if (this._deleted) return; 
     if (this.texture._refs) {
       this.texture._refs--;
       if (this.texture._refs) return;
     }
+    this._deleted = true;
     this.context.deleteTexture(this.texture);
-    if (this.texture._refs === 0 && this._framebuffer) {
+    
+    // Note: It must be the case that this.texture._refs === 0
+    if (this._framebuffer) {
       this.context.deleteFramebuffer(this._framebuffer);
       this._framebuffer = null;
     }
